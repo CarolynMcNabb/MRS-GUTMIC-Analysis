@@ -1,5 +1,8 @@
 # MRS-GUTMIC-Analysis
+## Carolyn McNabb, 2021
  MRS Analysis scripts for GUTMIC pilot study 
  
- Create folders to copy raw MRS data into
- `0.1_makedirs.py`
+ First, create folders to copy raw MRS data to, using:
+ ```
+ 0.1_makedirs.py
+ ```
