@@ -1,6 +1,6 @@
 """
 Carolyn McNabb 2021
-This script will make the directories for the pilot MRS data so they can be accessed by Osprey for analysis
+This script will make the directories for the pilot MRS data so they can be access by Osprey for analysis
 
 """
 
