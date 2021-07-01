@@ -1,7 +1,6 @@
 """
 Carolyn McNabb 2021
-This script will make the directories for the pilot MRS data so they can be accessed by Osprey for analysis
-
+This script will delete the directories under mrs in each subject's folder
 """
 
 import os
@@ -10,7 +9,6 @@ import string
 
 #path to mrs data on shared drive
 mrs_path = "/Users/Carolyn/Google Drive/My Drive/Pilot/MRS data /"
-dest_path = "/Users/Carolyn/Google Drive/My Drive/MRS/GUTMIC_Pilot/"
 
 #change directory to mrs data folder
 os.chdir(path = mrs_path)
@@ -39,17 +37,17 @@ with os.scandir(".") as dir:
             
             #put all these new directory names in an array
             dirs = {striatum_dir, striatum_h20, MC_dir, MC_h20, CO_dir, CO_h20}
-            #within the new array (dirs), make each of the above folders under parent folder mrs
+            #within the new array (dirs), delete each of the above folders under parent folder mrs
             for d in dirs:
-                #make directories if they do not already exist
-                newdir = pathlib.Path(os.path.join(dest_path,bids_sub,d))
-                #create the new folders only if they don't already exist. Do not overwrite any files already contained within folders
-                newdir.mkdir(parents=True, exist_ok=True)
-                print(newdir)
+                #if the folder exists
+                if os.path.exists(os.path.join(sub_path,"mrs",d)):
+                    #delete the folder
+                    os.rmdir(os.path.join(sub_path,"mrs",d))
+                    print(os.path.join(sub_path,"mrs",d), "removed!")
                
             #move up to mrs directory and begin again
             os.chdir(path = mrs_path)
 
             
 
-os.chdir("/Volumes/GoogleDrive/My Drive/GitHub/MRS-GUTMIC-Analysis")
+

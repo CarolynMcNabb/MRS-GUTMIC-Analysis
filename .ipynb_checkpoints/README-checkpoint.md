@@ -20,3 +20,8 @@
  ```
  0.2_copyDICOMs.py
  ```
+ 
+ Also copy the T1-weighted image files to an anat folder within each subject's folder. Note that Osprey sometimes deletes the anat file from the folder so you may need to repeat this step 
+ ```
+ 0.3_copyanat.py
+ ```

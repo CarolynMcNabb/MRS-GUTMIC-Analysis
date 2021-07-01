@@ -1,6 +1,6 @@
 """
 Carolyn McNabb 2021
-This script will make the directories for the pilot MRS data so they can be access by Osprey for analysis
+This script will make the directories for the pilot MRS data so they can be accessed by Osprey for analysis
 
 """
 
@@ -10,6 +10,7 @@ import string
 
 #path to mrs data on shared drive
 mrs_path = "/Users/Carolyn/Google Drive/My Drive/Pilot/MRS data /"
+dest_path = "/Users/Carolyn/Google Drive/My Drive/MRS/GUTMIC_Pilot/"
 
 #change directory to mrs data folder
 os.chdir(path = mrs_path)
@@ -41,7 +42,7 @@ with os.scandir(".") as dir:
             #within the new array (dirs), make each of the above folders under parent folder mrs
             for d in dirs:
                 #make directories if they do not already exist
-                newdir = pathlib.Path(os.path.join(sub_path,"mrs",d))
+                newdir = pathlib.Path(os.path.join(dest_path,bids_sub,d))
                 #create the new folders only if they don't already exist. Do not overwrite any files already contained within folders
                 newdir.mkdir(parents=True, exist_ok=True)
                 print(newdir)
@@ -51,4 +52,4 @@ with os.scandir(".") as dir:
 
             
 
-
+os.chdir("/Volumes/GoogleDrive/My Drive/GitHub/MRS-GUTMIC-Analysis")

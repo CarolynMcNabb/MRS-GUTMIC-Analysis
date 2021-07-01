@@ -4,12 +4,16 @@ This script will copy the raw DICOM files from the subject folders into their ow
 
 """
 
+print("This might take a while...")
+
 import os
 import pathlib
 import string
+import shutil
 
 #path to mrs data on shared drive
 mrs_path = "/Users/Carolyn/Google Drive/My Drive/Pilot/MRS data /"
+dest_path = "/Users/Carolyn/Google Drive/My Drive/MRS/GUTMIC_Pilot/"
 
 #change directory to mrs data folder
 os.chdir(path = mrs_path)
@@ -40,55 +44,78 @@ with os.scandir(".") as dir:
             #list files in the raw_data folder
             for fname in os.listdir(sourcedir):
                 #if the string defined below matches any files
+                #sub-01 has different file names for some reason, so requires the following two if statements:
+                if "Stra_single_averages" in fname:
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,striatum_dir)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
+                if "plus_1H2O_Stra_ave" in fname:
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,striatum_h20)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
+                #all the rest of the subjects have the same naming convention
                 if "STR_single_averages" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",striatum_dir)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,striatum_dir)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                 if "plus_1H2O_STR_ave" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",striatum_h20)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,striatum_h20)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                 if "MC_single_averages" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",MC_dir)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,MC_dir)
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                 if "plus_1H2O_MC_ave" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",MC_h20)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)        
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,MC_h20)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                 if "CO_single_averages" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",CO_dir)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,CO_dir)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                 if "plus_1H2O_CO_ave" in fname:
-                    #create a destination for the symbolic link
-                    destdir = os.path.join(sub_path,"mrs",CO_h20)
-                    dest = os.path.join(destdir,fname)
-                    #create a symbolic link with the same file name but in the destination folder
-                    os.symlink(fname,dest)
-                    print("symbolic link created for ",fname)
+                    #create a destination for the file
+                    destdir = os.path.join(dest_path,bids_sub,CO_h20)
+                    #path to original file
+                    src = os.path.join(sourcedir,fname)
+                    #create a file with the same file name but in the destination folder
+                    shutil.copy(src,destdir)
+                    print("Copy of ",fname, "created in ",destdir)
                
             #move up to mrs directory and begin again
             os.chdir(path = mrs_path)
 
             
-
-
+#return to GitHub directory
+os.chdir("/Volumes/GoogleDrive/My Drive/GitHub/MRS-GUTMIC-Analysis")
 
 
 
